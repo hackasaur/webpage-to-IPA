@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<title>convert webpage to IPA</title>
+
+<head>
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+  <label class="switch">
+    <input id = darkModeToggler type="checkbox">
+    <span class="slider round"></span>
+  </label>
+
+  <!-- <button class='button small' id="toggleDarkModeButton">Toggle dark mode</button> -->
+  <br>
+  <button class='button do' id='convertText'>loading...</button> <p id='pageStatus'></p>
+  <br>
+  <table id="pronunciationTable" class="wikitable" style="text-align:center; width:100%">
+    <tbody>
+      <tr>
+        <th colspan="2">Consonants
+        </th>
+      </tr>
+      <tr>
+        <th style="width:3em">IPA</th>
+        <th>Examples
+        </th>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">b</span></span>
+        </td>
+        <td style="text-align: left"><b>b</b>uy, ca<b>b</b>
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">d</span></span>
+        </td>
+        <td style="text-align: left"><b>d</b>ye, ca<b>d</b>, la<b>dd</b>er
+
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">dj</span></span>
+        </td>
+        <td style="text-align: left"><b>d</b>ew
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">dʒ</span></span>
+        </td>
+        <td style="text-align: left"><b>g</b>iant, ba<b>dge</b>
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">ð</span></span>
+        </td>
+        <td style="text-align: left"><b>th</b>y, brea<b>the</b>, fa<b>th</b>er
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">f</span></span>
+        </td>
+        <td style="text-align: left"><b>f</b>an, lea<b>f</b>
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">ɡ</span></span>
+        </td>
+        <td style="text-align: left"><b>g</b>uy, ba<b>g</b>
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">h</span></span>
+        </td>
+        <td style="text-align: left"><b>h</b>igh, a<b>h</b>ead
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">hw</span></span>
+        </td>
+        <td style="text-align: left"><b>wh</b>ine
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">j</span></span>
+        </td>
+        <td style="text-align: left"><b>y</b>es, hallelu<b>j</b>ah
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">k</span></span>
+        </td>
+        <td style="text-align: left">s<b>k</b>y, <b>c</b>ra<b>ck</b>
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">l</span></span>
+        </td>
+        <td style="text-align: left"><b>l</b>ie, s<b>l</b>y, ga<b>l</b>
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">lj</span></span>
+        </td>
+        <td style="text-align: left"><b>l</b>ute
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">m</span></span>
+        </td>
+        <td style="text-align: left"><b>m</b>y, s<b>m</b>ile, ca<b>m</b>
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">n</span></span>
+        </td>
+        <td style="text-align: left"><b>n</b>igh, s<b>n</b>ide, ca<b>n</b>
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">nj</span></span>
+        </td>
+        <td style="text-align: left"><b>n</b>ew
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">ŋ</span></span>
+        </td>
+        <td style="text-align: left">sa<b>ng</b>, si<b>n</b>k, si<b>ng</b>er
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">p</span></span>
+        </td>
+        <td style="text-align: left"><b>p</b>ie, s<b>p</b>y, ca<b>p</b>
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">r</span></span>
+        </td>
+        <td style="text-align: left"><b>r</b>ye, t<b>r</b>y, ve<b>r</b>y
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">s</span></span>
+        </td>
+        <td style="text-align: left"><b>s</b>igh, ma<b>ss</b>
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">sj</span></span>
+        </td>
+        <td style="text-align: left">con<b>s</b>ume
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">ʃ</span></span>
+        </td>
+        <td style="text-align: left"><b>sh</b>y, ca<b>sh</b>, emo<b>ti</b>on
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">t</span></span>
+        </td>
+        <td style="text-align: left"><b>t</b>ie, s<b>t</b>y, ca<b>t</b>, la<b>tt</b>er
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">tj</span></span>
+        </td>
+        <td style="text-align: left"><b>t</b>une
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">tʃ</span></span>
+        </td>
+        <td style="text-align: left"><b>Ch</b>ina, ca<b>tch</b>
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">θ</span></span>
+        </td>
+        <td style="text-align: left"><b>th</b>igh, ma<b>th</b>
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">θj</span></span>
+        </td>
+        <td style="text-align: left">en<b>th</b>use
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">v</span></span>
+        </td>
+        <td style="text-align: left"><b>v</b>ine, lea<b>v</b>e
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">w</span></span>
+        </td>
+        <td style="text-align: left"><b>w</b>ine, s<b>w</b>ine
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">z</span></span>
+        </td>
+        <td style="text-align: left"><b>z</b>oo, ha<b>s</b>
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">zj</span></span>
+        </td>
+        <td style="text-align: left"><b>Z</b>eus
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">ʒ</span></span>
+        </td>
+        <td style="text-align: left">plea<b>s</b>ure, bei<b>g</b>e
+        </td>
+      </tr>
+      <tr>
+        <th colspan="2">Marginal
+          segments
+        </th>
+      </tr>
+      <tr>
+        <th>IPA</th>
+        <th>Examples
+        </th>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">x</span></span>
+        </td>
+        <td style="text-align: left">u<b>gh</b>, lo<b>ch</b>, <b>Ch</b>anukah
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">ʔ</span></span>
+        </td>
+        <td style="text-align: left">uh<b>-</b>oh <span class="nowrap"><span
+              title="Representation in the International Phonetic Alphabet (IPA)" class="IPA">/ˈʔʌʔoʊ/</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">ɒ̃</span></span>
+        </td>
+        <td style="text-align: left">b<b>on</b> viv<b>an</b>t
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">æ̃</span></span>
+        </td>
+        <td style="text-align: left">f<b>in</b> de siècle
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">ɜː</span></span>
+        </td>
+        <td style="text-align: left">M<b>ö</b>bius <span style="font-size:85%;">(UK only)</span>
+        </td>
+      </tr>
+      <tr>
+        <th colspan="4">Vowels
+        </th>
+      </tr>
+      <tr>
+        <th colspan="2">Strong vowels</th>
+        </th>
+      </tr>
+      <tr>
+        <th>IPA</th>
+        <th>Examples</th>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">ɑː</span></span>
+        </td>
+        <td style="text-align: left">
+          <style data-mw-deduplicate="TemplateStyles:r920966791">
+            .mw-parser-output span.smallcaps {
+              font-variant: small-caps
+            }
+
+            .mw-parser-output span.smallcaps-smaller {
+              font-size: 85%
+            }
+          </style><span class="smallcaps smallcaps-smaller">P<b>A</b>LM</span>, br<b>a</b>
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">ɒ</span></span>
+        </td>
+        <td style="text-align: left">
+          <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r920966791"><span
+            class="smallcaps smallcaps-smaller">L<b>O</b>T</span>, bl<b>o</b>ckade
+        </td>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">æ</span></span>
+        </td>
+        <td style="text-align: left">
+          <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r920966791"><span
+            class="smallcaps smallcaps-smaller">TR<b>A</b>P</span>, t<b>a</b>ttoo
+        </td>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">aɪ</span></span>
+        </td>
+        <td style="text-align: left">
+          <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r920966791"><span
+            class="smallcaps smallcaps-smaller">PR<b>I</b>CE</span>, p<b>ie</b>
+        </td>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">aʊ</span></span>
+        </td>
+        <td style="text-align: left">
+          <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r920966791"><span
+            class="smallcaps smallcaps-smaller">M<b>OU</b>TH</span>, h<b>ow</b>
+        </td>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">ɛ</span></span>
+        </td>
+        <td style="text-align: left">
+          <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r920966791"><span
+            class="smallcaps smallcaps-smaller">DR<b>E</b>SS</span>, pr<b>e</b>stige
+        </td>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">eɪ</span></span>
+        </td>
+        <td style="text-align: left">
+          <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r920966791"><span
+            class="smallcaps smallcaps-smaller">F<b>A</b>CE</span>
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">ɪ</span></span>
+        </td>
+        <td style="text-align: left">
+          <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r920966791"><span
+            class="smallcaps smallcaps-smaller">K<b>I</b>T</span>, h<b>i</b>storic
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">iː</span></span>
+        </td>
+        <td style="text-align: left">
+          <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r920966791"><span
+            class="smallcaps smallcaps-smaller">FL<b>EE</b>CE</span>, pedigr<b>ee</b>, id<b>e</b>a
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">oʊ</span></span>
+        </td>
+        <td style="text-align: left">
+          <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r920966791"><span
+            class="smallcaps smallcaps-smaller">G<b>OA</b>T</span>
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">ɔː</span></span>
+        </td>
+        <td style="text-align: left">
+          <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r920966791"><span
+            class="smallcaps smallcaps-smaller">TH<b>OUGH</b>T</span>
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">ɔɪ</span></span>
+        </td>
+        <td style="text-align: left">
+          <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r920966791"><span
+            class="smallcaps smallcaps-smaller">CH<b>OI</b>CE</span>
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">ʊ</span></span>
+        </td>
+        <td style="text-align: left">
+          <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r920966791"><span
+            class="smallcaps smallcaps-smaller">F<b>OO</b>T</span>
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">uː</span></span>
+        </td>
+        <td style="text-align: left">
+          <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r920966791"><span
+            class="smallcaps smallcaps-smaller">G<b>OO</b>SE</span>, cr<b>u</b>el
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">ʌ</span></span>
+        </td>
+        <td style="text-align: left">
+          <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r920966791"><span
+            class="smallcaps smallcaps-smaller">STR<b>U</b>T</span>, <b>u</b>ntidy, tr<b>u</b>stee
+        </td>
+      </tr>
+      <tr>
+        <th colspan="2">Weak vowels
+        </th>
+      </tr>
+      <tr>
+        <th>IPA</th>
+        <th>Examples</th>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">ə</span></span>
+        </td>
+        <td style="text-align: left">
+          <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r920966791"><span
+            class="smallcaps smallcaps-smaller">COMM<b>A</b></span>, abb<b>o</b>t, b<b>a</b>zaar
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">ɪ</span></span>
+        </td>
+        <td style="text-align: left">rabb<b>i</b>t, b<b>i</b>zarre, Lat<b>i</b>n, heat<b>i</b>ng
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">i</span></span>
+        </td>
+        <td style="text-align: left">
+          <link rel="mw-deduplicated-inline-style" href="mw-data:TemplateStyles:r920966791"><span
+            class="smallcaps smallcaps-smaller">HAPP<b>Y</b></span>, med<b>i</b>ocre
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">u</span></span>
+        </td>
+        <td style="text-align: left">fr<b>u</b>ition
+        </td>
+      </tr>
+      <tr>
+        <th colspan="2">Stress
+        </th>
+      </tr>
+      <tr>
+        <th>IPA</th>
+        <th>Examples
+        </th>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">ˈ</span></span>
+        </td>
+        <td rowspan="2" style="text-align: left"><span class="nowrap"><b>in</b>to<b>na</b>tion <span
+              title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">/ˌɪntəˈneɪʃən/</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">ˌ</span></span>
+        </td>
+      </tr>
+      <tr>
+        <th colspan="2">Syllabification
+        </th>
+      </tr>
+      <tr>
+        <th>IPA</th>
+        <th>Examples
+        </th>
+      </tr>
+      <tr>
+        <td><span style="font-size: 120%;"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">.</span></span>
+        </td>
+        <td style="text-align: left"><span class="nowrap"><span
+              title="Representation in the International Phonetic Alphabet (IPA)" class="IPA">/ˈhaɪər/</span>
+            hire</span>, <span class="nowrap"><span title="Representation in the International Phonetic Alphabet (IPA)"
+              class="IPA">/ˈhaɪ.ər/</span>
+            higher</span><br><span class="nowrap"><span
+              title="Representation in the International Phonetic Alphabet (IPA)" class="IPA">/ˈtæks.peɪər/</span>
+            taxpayer</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <a href='https://en.wikipedia.org/wiki/Help:IPA/English' target="_blank">Help:IPA ˌwɪkiˈpiːdi.ə</a>
+  <script src="popup.js"></script>
+</body>
+
+</html>

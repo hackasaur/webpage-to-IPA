@@ -1,0 +1,5 @@
+// console.time('text to IPA conversion time')
+console.log('running conversion script...')
+traverseDOMAndConvert(document.body, () => { chrome.runtime.sendMessage("converted") })
+// console.log('text converted successfully!')
+// console.timeEnd('text to IPA conversion time')

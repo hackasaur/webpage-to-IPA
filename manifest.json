@@ -1,0 +1,30 @@
+{
+  "name": "webpage to IPA converter",
+  "description": "browser extension to read any webpage in IPA(International Phonetic Alphabet)",
+  "version": "2021.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker":
+      "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "convert to IPA.js",
+        "page reload alert.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "scripting",
+    "activeTab"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {"512": "IPA.png"}
+  }
+}
